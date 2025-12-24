@@ -2,17 +2,14 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 class Product
 {
-    
     private ?int $id;
     private ?string $name;
     private ?float $price;
-
 
     #[Context([DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
     private ?\DateTimeImmutable $createdAt;
