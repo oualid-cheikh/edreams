@@ -19,8 +19,9 @@ class ProductRepository
     public function findAll(?string $sort): array
     {
         $products=$this->parseProducts();
+    
         if ($sort){
-            $this->sortProducts($products,$sort);
+            $products=$this->sortProducts($products,$sort);
         }
 
         return $products;
@@ -37,17 +38,17 @@ class ProductRepository
         return null;
     }
 
-    public function findByPriceRange(?float $minPrice, ?float $maxPrice,?string $sort): array
+    public function findByPriceRange(float $minPrice, float $maxPrice,?string $sort): array
     {
         $products=$this->parseProducts();
         $products = array_filter($products, function (Product $product) use ($minPrice, $maxPrice) {
             $price = $product->getPrice();
             
-            if ($minPrice !== null && $price < $minPrice) {
+            if ( $price < $minPrice) {
                 return false;
             }
             
-            if ($maxPrice !== null && $price > $maxPrice) {
+            if ( $price > $maxPrice) {
                 return false;
             }
             
@@ -55,29 +56,25 @@ class ProductRepository
         });
 
         if ($sort){
-            $this->sortProducts($products,$sort);
+            $products=$this->sortProducts($products,$sort);
         }
         
         return $products ; 
 
 
     }
-     private function sortProducts(array $products, string $sort): void
-    {
-        usort($products, function (Product $a, Product $b) use ($sort) {
-            if ($sort === 'price_asc') {
-                return $a->getPrice() <=> $b->getPrice();
-            }
-            
-            if ($sort === 'price_desc') {
-                return $b->getPrice() <=> $a->getPrice();
-            }
-            
-            return 0;
-        });
-        
-        
-    }
+     private function sortProducts(array $products, string $sort): array
+{
+    usort($products, function (Product $a, Product $b) use ($sort) {
+        return match ($sort) {
+            'price_asc'  => $a->getPrice() <=> $b->getPrice(),
+            'price_desc' => $b->getPrice() <=> $a->getPrice(),
+            default      => 0,
+        };
+    });
+
+    return $products;
+}
     private function parseProducts(){
          $products = \json_decode(file_get_contents("{$this->rootdir}/data.json"), true);
 
