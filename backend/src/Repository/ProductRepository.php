@@ -3,30 +3,33 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ProductRepository
 {
-    private array $products;
-
-    public function __construct()
+    public function __construct(
+        #[Autowire(param: 'kernel.project_dir')]
+        private string  $rootdir
+    )
     {
-        $this->products = [
-            new Product(1, 'Clavier mécanique', 129.99, '2024-01-10'),
-            new Product(2, 'Souris gaming', 59.99, '2024-01-12'),
-            new Product(3, 'Écran 27 pouces', 299.99, '2024-01-15'),
-            new Product(4, 'Casque audio', 89.99, '2024-01-18'),
-            new Product(5, 'Webcam HD', 79.99, '2024-01-20'),
-        ];
     }
 
-    public function findAll(): array
+
+
+    public function findAll(?string $sort): array
     {
-        return $this->products;
+        $products=$this->parseProducts();
+        if ($sort){
+            $this->sortProducts($products,$sort);
+        }
+
+        return $products;
     }
 
     public function findById(int $id): ?Product
     {
-        foreach ($this->products as $product) {
+         $products=$this->parseProducts();
+        foreach ($products as $product) {
             if ($product->getId() === $id) {
                 return $product;
             }
@@ -34,9 +37,10 @@ class ProductRepository
         return null;
     }
 
-    public function findByPriceRange(?float $minPrice, ?float $maxPrice): array
+    public function findByPriceRange(?float $minPrice, ?float $maxPrice,?string $sort): array
     {
-        return array_filter($this->products, function (Product $product) use ($minPrice, $maxPrice) {
+        $products=$this->parseProducts();
+        $products = array_filter($products, function (Product $product) use ($minPrice, $maxPrice) {
             $price = $product->getPrice();
             
             if ($minPrice !== null && $price < $minPrice) {
@@ -49,5 +53,44 @@ class ProductRepository
             
             return true;
         });
+
+        if ($sort){
+            $this->sortProducts($products,$sort);
+        }
+        
+        return $products ; 
+
+
     }
-}
+     private function sortProducts(array $products, string $sort): void
+    {
+        usort($products, function (Product $a, Product $b) use ($sort) {
+            if ($sort === 'price_asc') {
+                return $a->getPrice() <=> $b->getPrice();
+            }
+            
+            if ($sort === 'price_desc') {
+                return $b->getPrice() <=> $a->getPrice();
+            }
+            
+            return 0;
+        });
+        
+        
+    }
+    private function parseProducts(){
+         $products = \json_decode(file_get_contents("{$this->rootdir}/data.json"), true);
+
+        $productsObjects = [];
+        foreach ($products as $element) {
+            $productsObjects[] = new Product(
+                $element['id'],
+                $element['name'],
+                $element['price'],
+                new \DateTimeImmutable($element['createdAt'])
+            );
+        }
+
+        return $productsObjects;
+    }
+      }

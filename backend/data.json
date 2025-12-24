@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Clavier mécanique",
+    "price": 129.99,
+    "createdAt": "2024-01-10"
+  },
+  {
+    "id": 2,
+    "name": "Souris gaming",
+    "price": 59.99,
+    "createdAt": "2024-01-12"
+  },
+  {
+    "id": 3,
+    "name": "Écran 27 pouces",
+    "price": 299.99,
+    "createdAt": "2024-01-15"
+  },
+  {
+    "id": 4,
+    "name": "Casque audio",
+    "price": 89.99,
+    "createdAt": "2024-01-18"
+  },
+  {
+    "id": 5,
+    "name": "Webcam HD",
+    "price": 79.99,
+    "createdAt": "2024-01-20"
+  }
+]
