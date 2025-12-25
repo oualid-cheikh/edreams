@@ -40,6 +40,7 @@ export async function searchProducts(
   if (sort) params.append('sort', sort);
   
   const url = `${API_URL}/products/search?${params.toString()}`;
+  
   const res = await fetch(url, { cache: 'no-store' });
   
   if (!res.ok) {
