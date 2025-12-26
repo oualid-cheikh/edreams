@@ -1,40 +1,45 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ProductFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
-  const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
-  const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
-  const [sort, setSort] = useState(searchParams.get('sort') || '');
+
+  const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
+  const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
+  const [sort, setSort] = useState(searchParams.get("sort") || "");
 
   const handleFilter = () => {
     const params = new URLSearchParams();
-    
-    if (minPrice) params.append('minPrice', minPrice);
-    if (maxPrice) params.append('maxPrice', maxPrice);
-    if (sort) params.append('sort', sort);
-    
-    router.push(params.toString() ? `/?${params.toString()}` : '/');
+
+    if (minPrice) params.append("minPrice", minPrice);
+    if (maxPrice) params.append("maxPrice", maxPrice);
+    if (sort) params.append("sort", sort);
+
+    router.push(params.toString() ? `/?${params.toString()}` : "/");
   };
 
   const handleReset = () => {
-    setMinPrice('');
-    setMaxPrice('');
-    setSort('');
-    router.push('/');
+    setMinPrice("");
+    setMaxPrice("");
+    setSort("");
+    router.push("/");
   };
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">Filtrer les produits</h2>
-      
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        Filtrer les produits
+      </h2>
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
-          <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="minPrice"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Prix minimum
           </label>
           <input
@@ -46,9 +51,12 @@ export default function ProductFilters() {
             className="w-full px-4 py-2.5 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9AB6] focus:border-transparent"
           />
         </div>
-        
+
         <div>
-          <label htmlFor="maxPrice" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="maxPrice"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Prix maximum
           </label>
           <input
@@ -60,9 +68,12 @@ export default function ProductFilters() {
             className="w-full px-4 py-2.5 text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6B9AB6] focus:border-transparent"
           />
         </div>
-        
+
         <div>
-          <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="sort"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
             Trier par
           </label>
           <select
@@ -76,7 +87,7 @@ export default function ProductFilters() {
             <option value="price_desc">Prix décroissant</option>
           </select>
         </div>
-        
+
         <div className="flex items-end gap-2">
           <button
             onClick={handleFilter}

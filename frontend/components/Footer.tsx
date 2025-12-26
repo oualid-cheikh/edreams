@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const productCategories = [
-    'Claviers mécaniques',
-    'Souris gaming',
-    'Écrans 27 pouces',
-    'Casques audio',
-    'Webcams HD'
+    "Claviers mécaniques",
+    "Souris gaming",
+    "Écrans 27 pouces",
+    "Casques audio",
+    "Webcams HD",
   ];
 
   return (
@@ -19,8 +19,8 @@ export default function Footer() {
           <div>
             <h3 className="text-white text-xl font-bold mb-4">eDreams</h3>
             <p className="text-sm leading-relaxed text-gray-400">
-              Votre destination en ligne pour l'équipement high-tech. 
-              Claviers, souris, écrans et accessoires gaming de qualité.
+              Votre destination en ligne pour l'équipement high-tech. Claviers,
+              souris, écrans et accessoires gaming de qualité.
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {productCategories.map((category) => (
                 <li key={category}>
-                  <Link 
+                  <Link
                     href="/"
                     className="text-sm hover:text-white transition-colors"
                   >
@@ -46,22 +46,34 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Liens Rapides</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-sm hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-sm hover:text-white transition-colors"
+                >
                   Accueil
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-sm hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-sm hover:text-white transition-colors"
+                >
                   Catalogue
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-sm hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-sm hover:text-white transition-colors"
+                >
                   Promotions
                 </Link>
               </li>
               <li>
-                <Link href="/" className="text-sm hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-sm hover:text-white transition-colors"
+                >
                   Nouveautés
                 </Link>
               </li>
@@ -73,19 +85,27 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Contact</h4>
             <div className="space-y-3">
               <div className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-[#6B9AB6] mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <svg
+                  className="w-5 h-5 text-[#6B9AB6] mt-0.5 flex-shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
                 </svg>
-                <a 
+                <a
                   href="mailto:edreamsfactory@gmail.com"
                   className="text-sm hover:text-white transition-colors break-all"
                 >
                   edreamsfactory@gmail.com
                 </a>
               </div>
-              <p className="text-xs text-gray-500">
-                Réponse sous 24h
-              </p>
+              <p className="text-xs text-gray-500">Réponse sous 24h</p>
             </div>
           </div>
         </div>
@@ -97,13 +117,22 @@ export default function Footer() {
               © {currentYear} eDreams Factory. Tous droits réservés.
             </p>
             <div className="flex items-center gap-6">
-              <Link href="/" className="text-sm text-gray-500 hover:text-white transition-colors">
+              <Link
+                href="/"
+                className="text-sm text-gray-500 hover:text-white transition-colors"
+              >
                 Mentions légales
               </Link>
-              <Link href="/" className="text-sm text-gray-500 hover:text-white transition-colors">
+              <Link
+                href="/"
+                className="text-sm text-gray-500 hover:text-white transition-colors"
+              >
                 Politique de confidentialité
               </Link>
-              <Link href="/" className="text-sm text-gray-500 hover:text-white transition-colors">
+              <Link
+                href="/"
+                className="text-sm text-gray-500 hover:text-white transition-colors"
+              >
                 CGV
               </Link>
             </div>
