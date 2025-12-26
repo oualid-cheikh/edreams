@@ -38,16 +38,14 @@ class ProductRepository
     public function findByPriceRange(float $minPrice, float $maxPrice, ?string $sort): array
     {
         $products = $this->parseProducts();
-        
-        
-       $filtredProducts = [];
-       foreach ($products as $product){
-         $price = $product->getPrice();
-        if($price >= $minPrice && $price <= $maxPrice ){
-             $filtredProducts[]=$product;
-        }
-       }
 
+        $filtredProducts = [];
+        foreach ($products as $product) {
+            $price = $product->getPrice();
+            if ($price >= $minPrice && $price <= $maxPrice) {
+                $filtredProducts[] = $product;
+            }
+        }
 
         if ($sort) {
             $filtredProducts = $this->sortProducts($filtredProducts, $sort);

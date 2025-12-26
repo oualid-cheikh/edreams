@@ -22,7 +22,6 @@ class ProductController extends AbstractController
             validationFailedStatusCode: Response::HTTP_BAD_REQUEST
         )] ProductQueryDto $dto,
     ): JsonResponse {
-        
         $products = $repository->findAll($dto->sort);
 
         return $this->json($products);
